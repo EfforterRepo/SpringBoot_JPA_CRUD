@@ -45,8 +45,8 @@ https://docs.spring.io/spring-data/jpa/docs/1.10.1.RELEASE/reference/html/#jpa.s
 	}
 	
 //	findById()
-	public User_table doSelectOne(int MEMBER_ID){
-		return userRecordRepo.findById(MEMBER_ID).get();
+	public User_table doSelectOne(int memberID){
+		return userRecordRepo.findById(memberID).get();
 	}
 	
 //	save()
@@ -71,4 +71,9 @@ https://docs.spring.io/spring-data/jpa/docs/1.10.1.RELEASE/reference/html/#jpa.s
 	    return userRecordRepo.existsByloginID(loginID);
 	}
 */
+	
+	@Transactional
+	public boolean existsByMemberId(String loginID){
+	    return userRecordRepo.existsByloginID(loginID);
+	}
 }

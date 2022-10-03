@@ -18,6 +18,8 @@ JpaRepository<User_table, Integer>
 
 public interface UserRecordRepo extends JpaRepository<User_table, Integer>{
 	/*  중복검사 하다가 실패.. 잘모르겠음
-    boolean existsByloginID(String loginID);
+	boolean existsByloginID(String loginID);
     */
+	
+	boolean existsByloginID(String loginID);
 }

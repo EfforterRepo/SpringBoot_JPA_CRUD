@@ -18,8 +18,13 @@ form {
 </head>
 <body>
 <h3>유저 추가</h3>
+<%
+boolean existId = (boolean)request.getAttribute("existId");
+if(existId) //exsistId가 false면 아이디가 존재하지 않는 것, true면 존재하는 것 
+	out.println("아이디가 이미 존재합니다. 다른 아이디를 입력해주세요.");
+%>
 <script type="text/javascript">
-    
+    	
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
         function checkValue()
         {

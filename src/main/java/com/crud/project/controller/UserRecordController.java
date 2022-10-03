@@ -75,25 +75,35 @@ R : List 조회 부분
 	
 	
 	@RequestMapping("/insert")
-	public String doInsert(@ModelAttribute UserModel insertModel) {
+	public String doInsert(@ModelAttribute UserModel insertModel, Model model) {
+	    model.addAttribute("existId",false);
 		System.out.println("insert");
 		return "userInsert";
 	}
 	
 	@RequestMapping("/insert_exe")
-	public String doInsert_exe(@ModelAttribute UserModel insertModel) {
+	public String doInsert_exe(@ModelAttribute UserModel insertModel, Model model) {
+	    System.out.println("insert_exe");
+	    boolean existId = userRcordService.existsByMemberId(insertModel.getUserId());
+	    model.addAttribute("existId",existId);
+	    if (existId == true) {
+	    	System.out.println("이미 사용중인 아이디 입니다.");
+	    	return "userInsert";
+	    } else {
+	    	System.out.println("사용가능한 아이디 입니다.");
+			User_table user_table = User_table.builder()
+					.loginID(insertModel.getUserId())
+					.password(Integer.toString(insertModel.getUserPw()))
+					.name(insertModel.getUserName())
+					.reg_day(LocalDateTime.now())
+					.build();
+			userRcordService.doInsert(user_table);
+	    }
 		
-		System.out.println("insert_exe");
 //		System.out.println("아이디 : " + insertModel.getUserId());
 //		System.out.println("패스워드 : " + insertModel.getUserPw());
 //		System.out.println("이름 : " + insertModel.getUserName());
-		User_table user_table = User_table.builder()
-				.loginID(insertModel.getUserId())
-				.password(Integer.toString(insertModel.getUserPw()))
-				.name(insertModel.getUserName())
-				.reg_day(LocalDateTime.now())
-				.build();
-		userRcordService.doInsert(user_table);
+
 		return "userInsertOk";
 	}
 	

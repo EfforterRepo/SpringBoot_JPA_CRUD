@@ -50,10 +50,10 @@ table.type02 td {
     </tr>
  <c:forEach items = "${list}" var = "list_member">
     <tr>
-      <td>${list_member.getMEMBER_ID()}</td>
-      <td>${list_member.getLOGIN_ID()}</td>
-      <td>${list_member.getPASSWORD()}</td>
-      <td>${list_member.getNAME()}</td>
+      <td>${list_member.getMemberID()}</td>
+      <td>${list_member.getLoginID()}</td>
+      <td>${list_member.getPassword()}</td>
+      <td>${list_member.getName()}</td>
       <td>${list_member.getReg_day()}</td>
     </tr>
 </c:forEach>
